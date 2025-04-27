@@ -8,7 +8,7 @@ interface ProjectsScreenProps {
 export default function ProjectsScreen({ onNavigate }: ProjectsScreenProps) {
   const BASE_URL = process.env.NODE_ENV === "development"
   ? "http://localhost:3000/"
-  : "https://roshanandroiddevelpor.netlify.app/";
+  : "https://roshanandroiddevelper.netlify.app/";
 
 
   return (
