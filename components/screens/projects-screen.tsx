@@ -20,7 +20,7 @@ export default function ProjectsScreen({ onNavigate }: ProjectsScreenProps) {
           title="Finance-Advisor"
           SubTitle="Hackathon Winner"
           description="A React Native app that lets Small Business Owners maintains their transactions(Online+cash) in table format , for easier maintainance and many more..."
-          screenshots={["/Finance_Screen.jpg", "/Finance_Screen1.jpg", "Finance_Screen2.jpg","Finance_Screen3.jpg"]}
+          screenshots={["/Finance_Screen.jpg", "/Finance_Screen1.jpg", "Finance_Screen5.jpg","Finance_Screen4.jpg","Finance_Screen6.png"]}
           apkUrl={`${BASE_URL}/apks/FinanceAdvisor.apk`}
         />
 
