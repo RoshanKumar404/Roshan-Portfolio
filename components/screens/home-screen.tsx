@@ -26,7 +26,7 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
           <h1 className="text-4xl font-bold mb-6">Kumar.</h1>
 
           <div className="text-sm text-gray-300 mb-8">
-            SOFTWARE ENGINEER | ANDROID NATIVE AND CROSS PLATFORM | JavaScript | Debugger
+            SOFTWARE ENGINEER | ANDROID NATIVE AND CROSS PLATFORM | JavaScript | Python | Debugger
           </div>
 
           <Button

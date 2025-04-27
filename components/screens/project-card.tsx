@@ -7,12 +7,13 @@ import { cn } from "@/lib/utils"
 
 interface ProjectCardProps {
   title: string
+  SubTitle:string
   description: string
   screenshots: string[]
   apkUrl?: string
 }
 
-export default function ProjectCard({ title, description, screenshots, apkUrl }: ProjectCardProps) {
+export default function ProjectCard({ title, description, screenshots, apkUrl,SubTitle }: ProjectCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const nextImage = () => {
@@ -27,6 +28,7 @@ export default function ProjectCard({ title, description, screenshots, apkUrl }:
     <div className="bg-gray-800 rounded-lg overflow-hidden">
       <div className="p-4">
         <h2 className="text-xl font-bold mb-2">{title}</h2>
+        <h4 className="text-sm font-bold">{SubTitle}</h4>
         <p className="text-sm text-gray-300 mb-4">{description}</p>
 
         {screenshots.length > 0 && (

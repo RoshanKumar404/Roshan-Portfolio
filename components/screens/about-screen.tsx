@@ -6,6 +6,11 @@ interface AboutScreenProps {
 }
 
 export default function AboutScreen({ onNavigate }: AboutScreenProps) {
+  const BASE_URL = process.env.NODE_ENV === "development"
+  ? "http://localhost:3000/Roshan_Resume.pdf"
+  : "https://roshanandroiddevelpor.netlify.app/Roshan_Resume.pdf";
+
+
   return (
     <div className="min-h-full bg-gray-900 text-white p-6 overflow-y-auto">
       <h1 className="text-2xl font-bold mb-4">ABOUT</h1>
@@ -108,7 +113,7 @@ export default function AboutScreen({ onNavigate }: AboutScreenProps) {
       <div className="flex space-x-3">
         <Button className="bg-pink-600 hover:bg-pink-700 flex-1">HIRE ME</Button>
         <Button className="bg-gray-700 hover:bg-gray-600 flex-1" asChild>
-          <a href="/Roshan_Resume.pdf" download>
+          <a href={BASE_URL}download>
             DOWNLOAD CV
           </a>
         </Button>

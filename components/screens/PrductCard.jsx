@@ -1,9 +1,10 @@
 import React from 'react';
 
-const ProjectCard = ({ title, description, screenshots, video, apk }) => {
+const ProjectCard = ({ title, description, screenshots, SubTitle, apk }) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-4xl mx-auto my-8">
       <h2 className="text-2xl font-bold mb-2 text-gray-800">{title}</h2>
+      {/* <h3 className="text-2xl font-bold mb-2 text-gray-800">{SubTitle}</h3> */}
       <p className="text-gray-600 mb-4">{description}</p>
 
       {/* Screenshots */}
