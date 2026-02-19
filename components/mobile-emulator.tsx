@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronLeft, Menu } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 import HomeScreen from "./screens/home-screen"
 import AboutScreen from "./screens/about-screen"
 import ProjectsScreen from "./screens/projects-screen"
@@ -12,109 +13,186 @@ export type ScreenType = "home" | "about" | "projects" | "contact"
 
 export default function MobileEmulator() {
   const [currentScreen, setCurrentScreen] = useState<ScreenType>("home")
+  const [prevScreen, setPrevScreen] = useState<ScreenType | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  const screens = {
-    home: <HomeScreen onNavigate={setCurrentScreen} />,
-    about: <AboutScreen onNavigate={setCurrentScreen} />,
-    projects: <ProjectsScreen onNavigate={setCurrentScreen} />,
-    contact: <ContactScreen onNavigate={setCurrentScreen} />,
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const navigateTo = (screen: ScreenType) => {
+    if (screen !== currentScreen) {
+      setPrevScreen(currentScreen)
+      setCurrentScreen(screen)
+    }
   }
 
+  // Clear prevScreen after transition
+  useEffect(() => {
+    if (prevScreen) {
+      const timer = setTimeout(() => {
+        setPrevScreen(null)
+      }, 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [currentScreen, prevScreen])
+
   const handleBack = () => {
-    setCurrentScreen("home")
+    navigateTo("home")
   }
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
   }
 
+  const renderScreen = (screen: ScreenType) => {
+    switch (screen) {
+      case "home": return <HomeScreen onNavigate={navigateTo} />;
+      case "about": return <AboutScreen onNavigate={navigateTo} />;
+      case "projects": return <ProjectsScreen onNavigate={navigateTo} />;
+      case "contact": return <ContactScreen onNavigate={navigateTo} />;
+      default: return <HomeScreen onNavigate={navigateTo} />;
+    }
+  }
+
+  if (!isMounted) {
+    return (
+      <div className="relative mx-auto">
+        <div className="relative w-[320px] h-[650px] mx-auto bg-black rounded-[40px] shadow-2xl border-8 border-gray-800 flex items-center justify-center">
+          <div className="text-white opacity-20 text-xs">Loading...</div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="relative mx-auto">
       {/* Phone frame */}
-      <div className="relative w-[320px] h-[650px] mx-auto bg-black rounded-[40px] shadow-xl overflow-hidden border-8 border-gray-800">
+      <div className="relative w-[320px] h-[650px] mx-auto bg-black rounded-[40px] shadow-2xl overflow-hidden border-8 border-gray-800">
         {/* Status bar */}
-        <div className="absolute top-0 left-0 right-0 h-6 bg-black z-10 flex justify-between items-center px-5">
-          <div className="text-white text-xs">9:41</div>
-          <div className="flex space-x-1">
-            <div className="w-4 h-2 bg-white rounded-sm"></div>
-            <div className="w-2 h-2 bg-white rounded-full"></div>
-            <div className="w-2 h-2 bg-white rounded-full"></div>
+        <div className="absolute top-0 left-0 right-0 h-6 bg-black z-40 flex justify-between items-center px-5">
+          <div className="text-white text-[10px] font-medium">9:41</div>
+          <div className="flex items-center space-x-1.5">
+            <div className="flex space-x-0.5">
+              <div className="w-0.5 h-1.5 bg-white/40 rounded-full"></div>
+              <div className="w-0.5 h-2 bg-white/60 rounded-full"></div>
+              <div className="w-0.5 h-2.5 bg-white rounded-full"></div>
+            </div>
+            <div className="text-[10px] text-white font-medium">5G</div>
+            <div className="w-5 h-2.5 border border-white/40 rounded-sm relative flex items-center px-0.5">
+              <div className="h-1.5 bg-white rounded-xs" style={{ width: "60%" }}></div>
+              <div className="absolute -right-1 w-0.5 h-1 bg-white/40 rounded-r-full"></div>
+            </div>
           </div>
         </div>
 
         {/* Notch */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-40 h-6 bg-black rounded-b-xl z-20"></div>
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-40 h-6 bg-black rounded-b-xl z-50"></div>
 
         {/* Screen content */}
-        <div className="w-full h-full pt-6 bg-gray-900 overflow-hidden">
+        <div className="w-full h-full pt-6 bg-gray-900 overflow-hidden relative">
           {/* Header */}
-          <div className="flex justify-between items-center p-4 bg-gray-900 text-white">
-            {currentScreen !== "home" ? (
-              <button onClick={handleBack} className="p-1">
-                <ChevronLeft size={24} />
-              </button>
-            ) : (
-              <div className="text-lg font-bold">PORTFOLIO</div>
-            )}
-            <button onClick={toggleMenu} className="p-1">
+          <div className="flex justify-between items-center p-4 bg-gray-900/80 backdrop-blur-md text-white z-40 relative">
+            <AnimatePresence mode="wait">
+              {currentScreen !== "home" ? (
+                <motion.button 
+                  key="back-btn"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  onClick={handleBack} 
+                  className="p-1 hover:bg-white/10 rounded-full transition-colors"
+                >
+                  <ChevronLeft size={24} />
+                </motion.button>
+              ) : (
+                <motion.div 
+                  key="logo"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-lg font-bold tracking-tight"
+                >
+                  PORTFOLIO
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <button onClick={toggleMenu} className="p-1 hover:bg-white/10 rounded-full transition-colors">
               <Menu size={24} />
             </button>
           </div>
 
           {/* Menu overlay */}
-          <div
-            className={cn(
-              "absolute inset-0 bg-black/90 z-30 transition-transform duration-300 pt-16",
-              menuOpen ? "translate-y-0" : "translate-y-full",
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="absolute inset-0 bg-black/90 backdrop-blur-xl z-50 pt-16"
+              >
+                <div className="flex flex-col text-white text-xl p-8 space-y-6">
+                  {["home", "about", "projects", "contact"].map((screen) => (
+                    <motion.button
+                      key={screen}
+                      whileHover={{ x: 10, color: "#ec4899" }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        navigateTo(screen as ScreenType)
+                        setMenuOpen(false)
+                      }}
+                      className="text-left font-medium capitalize"
+                    >
+                      {screen}
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
             )}
-          >
-            <div className="flex flex-col text-white text-xl p-8 space-y-6">
-              <button
-                onClick={() => {
-                  setCurrentScreen("home")
-                  setMenuOpen(false)
-                }}
-                className="text-left hover:text-pink-500 transition-colors"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => {
-                  setCurrentScreen("about")
-                  setMenuOpen(false)
-                }}
-                className="text-left hover:text-pink-500 transition-colors"
-              >
-                About
-              </button>
-              <button
-                onClick={() => {
-                  setCurrentScreen("projects")
-                  setMenuOpen(false)
-                }}
-                className="text-left hover:text-pink-500 transition-colors"
-              >
-                Projects
-              </button>
-              <button
-                onClick={() => {
-                  setCurrentScreen("contact")
-                  setMenuOpen(false)
-                }}
-                className="text-left hover:text-pink-500 transition-colors"
-              >
-                Contact
-              </button>
-            </div>
-          </div>
+          </AnimatePresence>
 
-          {/* Screen content */}
-          <div className="h-[calc(100%-56px)] overflow-y-auto">{screens[currentScreen]}</div>
+          {/* Main App Container with Layering */}
+          <div className="relative h-[calc(100%-56px)] w-full overflow-hidden bg-black/20">
+            <AnimatePresence mode="popLayout">
+              {/* Background Screen (Stacked & Blurred) */}
+              {prevScreen && (
+                <motion.div
+                  key={`bg-${prevScreen}`}
+                  initial={{ opacity: 0.5, scale: 0.9, filter: "blur(4px)", y: -10 }}
+                  animate={{ opacity: 0.3, scale: 0.85, filter: "blur(10px)", y: -20 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className="absolute inset-x-4 top-4 bottom-10 w-[calc(100%-32px)] pointer-events-none z-10 rounded-2xl overflow-hidden brightness-50"
+                >
+                  {renderScreen(prevScreen)}
+                </motion.div>
+              )}
+
+              {/* Foreground Screen (Main Card) */}
+              <motion.div
+                key={currentScreen}
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "100%", opacity: 0 }}
+                transition={{ 
+                  type: "spring", 
+                  damping: 28, 
+                  stiffness: 220,
+                  mass: 1
+                }}
+                className="absolute inset-0 w-full h-full z-20 overflow-y-auto bg-gray-900 rounded-t-[32px] shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t border-white/10"
+              >
+                <div className="w-full h-full pb-10">
+                  {renderScreen(currentScreen)}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
-        {/* Home button / indicator */}
-        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gray-600 rounded-full"></div>
+        {/* Home indicator */}
+        <div className="absolute bottom-1.5 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-50"></div>
       </div>
     </div>
   )
