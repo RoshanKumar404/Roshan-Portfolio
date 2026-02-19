@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Linkedin, Github, BookOpen } from "lucide-react"
+import { motion } from "framer-motion"
 import type { ScreenType } from "../mobile-emulator"
 
 interface HomeScreenProps {
@@ -11,52 +12,129 @@ interface HomeScreenProps {
 export default function HomeScreen({ onNavigate }: HomeScreenProps) {
   return (
     <div className="min-h-full bg-gray-900 text-white flex flex-col relative overflow-hidden">
-      {/* Stars background effect */}
-      <div className="absolute inset-0 bg-[url('/stars-bg.png')] bg-cover opacity-30"></div>
-
-      <div className="relative z-10 flex-1 flex flex-col justify-between p-6">
-        <div className="flex justify-center mb-6">
-          <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-pink-500">
-            <img src="/profile.jpg" alt="Roshan Kumar" className="w-full h-full object-cover" />
-          </div>
+      {/* Dynamic CSS Stars Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-slate-950"></div>
+        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950"></div>
+        {/* Animated CSS Stars */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute bg-white rounded-full opacity-20"
+              initial={{ 
+                x: Math.random() * 320, 
+                y: Math.random() * 600, 
+                width: Math.random() * 2 + 1, 
+                height: Math.random() * 2 + 1 
+              }}
+              animate={{ 
+                opacity: [0.1, 0.4, 0.1],
+                scale: [1, 1.2, 1] 
+              }}
+              transition={{ 
+                duration: 2 + Math.random() * 3, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+            />
+          ))}
         </div>
-        <div className="mt-8">
-          <h2 className="text-xl font-light mb-2">HELLO, WORLD.</h2>
-          <h1 className="text-4xl font-bold mb-1">I'm Roshan</h1>
-          <h1 className="text-4xl font-bold mb-6">Kumar.</h1>
+      </div>
 
-          <div className="text-sm text-gray-300 mb-8">
-            SOFTWARE ENGINEER | ANDROID NATIVE AND CROSS PLATFORM | JavaScript | Python | Debugger
+      <div className="relative z-10 flex-1 flex flex-col justify-between p-6 pt-10">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", damping: 15 }}
+          className="flex justify-center mb-6"
+        >
+          <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-pink-500 shadow-[0_0_20px_rgba(236,72,153,0.3)]">
+            <img 
+              src="/profile.jpg" 
+              alt="Roshan Kumar" 
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Roshan+Kumar&background=ec4899&color=fff";
+              }}
+            />
           </div>
+        </motion.div>
 
-          <Button
-            onClick={() => onNavigate("about")}
-            className="bg-pink-600 hover:bg-pink-700 text-white rounded-md px-6 py-2"
+        <div className="mt-4">
+          <motion.h2 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-xs font-bold tracking-[0.3em] text-pink-500 mb-4 uppercase"
           >
-            MORE ABOUT ME
-          </Button>
-        </div>
+            Software Engineer
+          </motion.h2>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <h1 className="text-4xl font-black tracking-tight leading-tight">
+              Hello, I'm <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">
+                Roshan Kumar.
+              </span>
+            </h1>
+          </motion.div>
 
-        {/* Person silhouette */}
-        <div className="absolute bottom-0 right-0 w-40 h-80 opacity-70">
-          <div className="w-full h-full bg-[url('/person-silhouette.png')] bg-contain bg-no-repeat bg-bottom"></div>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.7 }}
+            transition={{ delay: 0.4 }}
+            className="text-xs text-gray-400 mt-6 leading-relaxed max-w-[200px]"
+          >
+            Specializing in Android Native, Cross-platform, and AI integration.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mt-8"
+          >
+            <Button
+              onClick={() => onNavigate("about")}
+              className="bg-white text-black hover:bg-gray-200 rounded-full px-8 py-6 text-xs font-bold transition-all shadow-xl active:scale-95"
+            >
+              MORE ABOUT ME
+            </Button>
+          </motion.div>
         </div>
 
         {/* Social links */}
-        <div className="mt-auto mb-4 flex space-x-4">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="mt-auto mb-4 flex space-x-6 pt-10"
+        >
           <a
             href="https://www.linkedin.com/in/roshan-kumar-3bb631267/"
-            className="text-white hover:text-pink-500 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
           >
-            <Linkedin size={24} />
+            <Linkedin size={20} />
           </a>
-          <a href="https://github.com/RoshanKumar404" className="text-white hover:text-pink-500 transition-colors">
-            <Github size={24} />
+          <a 
+            href="https://github.com/RoshanKumar404" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+          >
+            <Github size={20} />
           </a>
-          <a href="#" className="text-white hover:text-pink-500 transition-colors">
-            <BookOpen size={24} />
+          <a href="#" className="text-gray-400 hover:text-white transition-colors">
+            <BookOpen size={20} />
           </a>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
