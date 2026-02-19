@@ -10,8 +10,8 @@ interface AboutScreenProps {
 
 export default function AboutScreen({ onNavigate }: AboutScreenProps) {
   const BASE_URL = process.env.NODE_ENV === "development"
-  ? "http://localhost:3000/Roshan_Resume.pdf"
-  : "https://roshanandroiddevelper.netlify.app/Roshan_Resume.pdf";
+  ? "http://localhost:3000/Roshan Resume.pdf"
+  : "https://roshanandroiddevelper.netlify.app/Roshan Resume.pdf";
 
 
   return (
