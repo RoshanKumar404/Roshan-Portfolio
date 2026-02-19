@@ -19,9 +19,9 @@ export default function ProjectsScreen({ onNavigate }: ProjectsScreenProps) {
 
       <div className="space-y-8">
         <ProjectCard
-          title="Water-Logging Detector"
-          SubTitle="AI & GPS Integrated"
-          description="An enterprise-grade Android application that uses AI to detect water logging from camera images and generates GPS-tagged reports for city management."
+          title="Global Water-Logging Detector"
+          SubTitle="AI & GPS Monitoring"
+          description="A sophisticated Android solution leveraging Computer Vision to identify water-logged areas. It generates real-time, GPS-tagged reports to assist municipal authorities in rapid flood response."
           screenshots={[
             "/Dtector  image uploading for AI procesing.png",
             "/camera screen.png",
@@ -34,7 +34,7 @@ export default function ProjectsScreen({ onNavigate }: ProjectsScreenProps) {
         <ProjectCard
           title="Live Stream Pro"
           SubTitle="Kotlin & Jetpack Compose"
-          description="A high-performance Live TV streaming application built with Kotlin. Features include channel categorization, fullscreen playback, and seamless UI."
+          description="A high-performance streaming platform offering seamless live TV playback. Features a modern intuitive interface, optimized buffering, and robust channel management."
           screenshots={[
             "/Live tv channels.png",
             "/live tv channel list.png",
@@ -45,17 +45,17 @@ export default function ProjectsScreen({ onNavigate }: ProjectsScreenProps) {
         />
 
         <ProjectCard
-          title="Finance-Advisor"
-          SubTitle="Hackathon Winner"
-          description="A React Native app that lets Small Business Owners maintains their transactions(Online+cash) in table format , for easier maintainance and many more..."
+          title="Finance Advisor"
+          SubTitle="Hackathon Champion"
+          description="An intuitive financial management app developed for small business owners. It simplifies bookkeeping with digital ledger tracking for online and cash transactions."
           screenshots={["/Finance_Screen.jpg", "/Finance_Screen1.jpg", "Finance_Screen5.jpg","Finance_Screen4.jpg","Finance_Screen6.png"]}
           apkUrl={`${BASE_URL}/apks/FinanceAdvisor.apk`}
         />
 
         <ProjectCard
-          title="Velvet View "
-          SubTitle="Working"
-          description="An AI Wallpaper gnerating App"
+          title="Velvet View"
+          SubTitle="Generative AI"
+          description="An innovative mobile gallery powered by DALL-E and Midjourney integration. Velvet View allows users to generate and apply high-resolution AI wallpapers instantly."
           screenshots={["/Velvet_Screen1.png", "/Velvet_Screen2.png", "/Velvet_Screen3.png","/Velvet_Screen4.png","/Velvet_Screen5.png","/Velvet_Screen6.png"]}
           apkUrl={`${BASE_URL}/apks/VelvetView.apk`}
         />

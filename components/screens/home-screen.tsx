@@ -1,15 +1,35 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Linkedin, Github, BookOpen } from "lucide-react"
 import { motion } from "framer-motion"
 import type { ScreenType } from "../mobile-emulator"
+
+interface Star {
+  x: number;
+  y: number;
+  size: number;
+  duration: number;
+}
 
 interface HomeScreenProps {
   onNavigate: (screen: ScreenType) => void
 }
 
 export default function HomeScreen({ onNavigate }: HomeScreenProps) {
+  const [stars, setStars] = useState<Star[]>([])
+
+  useEffect(() => {
+    const generatedStars = [...Array(20)].map(() => ({
+      x: Math.random() * 320,
+      y: Math.random() * 600,
+      size: Math.random() * 2 + 1,
+      duration: 2 + Math.random() * 3,
+    }))
+    setStars(generatedStars)
+  }, [])
+
   return (
     <div className="min-h-full bg-gray-900 text-white flex flex-col relative overflow-hidden">
       {/* Dynamic CSS Stars Background */}
@@ -18,22 +38,22 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
         <div className="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950"></div>
         {/* Animated CSS Stars */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
+          {stars.map((star, i) => (
             <motion.div
               key={i}
               className="absolute bg-white rounded-full opacity-20"
               initial={{ 
-                x: Math.random() * 320, 
-                y: Math.random() * 600, 
-                width: Math.random() * 2 + 1, 
-                height: Math.random() * 2 + 1 
+                x: star.x, 
+                y: star.y, 
+                width: star.size, 
+                height: star.size 
               }}
               animate={{ 
                 opacity: [0.1, 0.4, 0.1],
                 scale: [1, 1.2, 1] 
               }}
               transition={{ 
-                duration: 2 + Math.random() * 3, 
+                duration: star.duration, 
                 repeat: Infinity, 
                 ease: "easeInOut" 
               }}
@@ -77,9 +97,9 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
             transition={{ delay: 0.3 }}
           >
             <h1 className="text-4xl font-black tracking-tight leading-tight">
-              Hello, I'm <br />
+              Crafting <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">
-                Roshan Kumar.
+                Digital Excellence.
               </span>
             </h1>
           </motion.div>
@@ -88,9 +108,9 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.7 }}
             transition={{ delay: 0.4 }}
-            className="text-xs text-gray-400 mt-6 leading-relaxed max-w-[200px]"
+            className="text-xs text-gray-400 mt-6 leading-relaxed max-w-[240px]"
           >
-            Specializing in Android Native, Cross-platform, and AI integration.
+            I'm Roshan Kumar — a Software Engineer dedicated to crafting seamless mobile experiences and intelligent AI-driven solutions.
           </motion.p>
 
           <motion.div

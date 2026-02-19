@@ -20,9 +20,8 @@ export default function AboutScreen({ onNavigate }: AboutScreenProps) {
       <h2 className="text-xl mb-4">Let me introduce myself.</h2>
 
       <p className="text-sm text-gray-300 mb-6 leading-relaxed">
-        Passionate Software Engineer with a focus on Android Native and AI Integration. 
-        Winner of the <span className="text-pink-500 font-semibold">Hack Horizon Hackathon</span> (GDG Ranchi). 
-        I specialize in building high-performance mobile apps and intelligent web systems.
+        I am a results-driven Software Engineer with a mastery in <span className="text-pink-500 font-semibold">Android Native Development</span> and <span className="text-pink-500 font-semibold">AI Integration</span>. 
+        As the champion of the <span className="text-blue-400 font-semibold">Hack Horizon Hackathon</span>, I thrive on solving complex problems with elegant, high-performance code and intelligent system design.
       </p>
 
       <div className="mb-6 bg-gray-800/50 p-4 rounded-2xl border border-white/5 backdrop-blur-sm">

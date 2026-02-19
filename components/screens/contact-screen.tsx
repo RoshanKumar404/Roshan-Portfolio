@@ -26,8 +26,8 @@ export default function ContactScreen({ onNavigate }: ContactScreenProps) {
       <h1 className="text-2xl font-bold mb-2">CONTACT</h1>
       <h2 className="text-xl mb-4">I'd Love To Hear From You.</h2>
 
-      <p className="text-sm text-gray-300 mb-6">
-        In case of any queries you can send your queries by following the below details!
+      <p className="text-sm text-gray-300 mb-6 font-medium">
+        Have a project in mind or just want to say hello? Drop me a message below and I'll get back to you as soon as possible.
       </p>
 
       <form action={handleSubmit} className="space-y-4 mb-8">
