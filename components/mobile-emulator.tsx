@@ -15,11 +15,6 @@ export default function MobileEmulator() {
   const [currentScreen, setCurrentScreen] = useState<ScreenType>("home")
   const [prevScreen, setPrevScreen] = useState<ScreenType | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
   const navigateTo = (screen: ScreenType) => {
     if (screen !== currentScreen) {
@@ -54,16 +49,6 @@ export default function MobileEmulator() {
       case "contact": return <ContactScreen onNavigate={navigateTo} />;
       default: return <HomeScreen onNavigate={navigateTo} />;
     }
-  }
-
-  if (!isMounted) {
-    return (
-      <div className="relative mx-auto">
-        <div className="relative w-[320px] h-[650px] mx-auto bg-black rounded-[40px] shadow-2xl border-8 border-gray-800 flex items-center justify-center">
-          <div className="text-white opacity-20 text-xs">Loading...</div>
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -156,16 +141,21 @@ export default function MobileEmulator() {
           {/* Main App Container with Layering */}
           <div className="relative h-[calc(100%-56px)] w-full overflow-hidden bg-black/20">
             <AnimatePresence mode="popLayout">
-              {/* Background Screen (Stacked & Blurred) */}
+              {/* Enhanced Background Screen (Full-width Vibrant Blur) */}
               {prevScreen && (
                 <motion.div
                   key={`bg-${prevScreen}`}
-                  initial={{ opacity: 0.5, scale: 0.9, filter: "blur(4px)", y: -10 }}
-                  animate={{ opacity: 0.3, scale: 0.85, filter: "blur(10px)", y: -20 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="absolute inset-x-4 top-4 bottom-10 w-[calc(100%-32px)] pointer-events-none z-10 rounded-2xl overflow-hidden brightness-50"
+                  initial={{ opacity: 0, scale: 1, filter: "blur(10px) saturate(100%)" }}
+                  animate={{ opacity: 0.5, scale: 1.05, filter: "blur(25px) saturate(180%)" }}
+                  exit={{ opacity: 0, scale: 1.1 }}
+                  transition={{ duration: 0.8 }}
+                  className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-hidden brightness-75"
                 >
-                  {renderScreen(prevScreen)}
+                  <div className="w-full h-full scale-110 origin-center">
+                    {renderScreen(prevScreen)}
+                  </div>
+                  {/* Dark overlay to ensure foreground legibility */}
+                  <div className="absolute inset-0 bg-black/40"></div>
                 </motion.div>
               )}
 

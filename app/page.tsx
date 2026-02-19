@@ -1,4 +1,17 @@
-import MobileEmulator from "@/components/mobile-emulator"
+"use client"
+
+import dynamic from 'next/dynamic'
+
+const MobileEmulator = dynamic(() => import("@/components/mobile-emulator"), {
+  ssr: false,
+  loading: () => (
+    <div className="relative mx-auto">
+      <div className="relative w-[320px] h-[650px] mx-auto bg-black rounded-[40px] shadow-2xl border-8 border-gray-800 flex items-center justify-center">
+        <div className="text-white opacity-20 text-xs tracking-widest font-bold">INITIALIZING...</div>
+      </div>
+    </div>
+  )
+})
 
 export default function Home() {
   return (
