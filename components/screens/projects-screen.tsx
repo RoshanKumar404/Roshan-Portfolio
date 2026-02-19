@@ -1,3 +1,5 @@
+"use client"
+
 import type { ScreenType } from "../mobile-emulator"
 import ProjectCard from "./project-card"
 
@@ -16,6 +18,32 @@ export default function ProjectsScreen({ onNavigate }: ProjectsScreenProps) {
       <h1 className="text-2xl font-bold mb-6">PROJECTS</h1>
 
       <div className="space-y-8">
+        <ProjectCard
+          title="Water-Logging Detector"
+          SubTitle="AI & GPS Integrated"
+          description="An enterprise-grade Android application that uses AI to detect water logging from camera images and generates GPS-tagged reports for city management."
+          screenshots={[
+            "/Dtector  image uploading for AI procesing.png",
+            "/camera screen.png",
+            "/water detector report ai resposne.png",
+            "/location the water logged area detected form the image.png"
+          ]}
+          apkUrl={`${BASE_URL}/apks/detector.apk`}
+        />
+
+        <ProjectCard
+          title="Live Stream Pro"
+          SubTitle="Kotlin & Jetpack Compose"
+          description="A high-performance Live TV streaming application built with Kotlin. Features include channel categorization, fullscreen playback, and seamless UI."
+          screenshots={[
+            "/Live tv channels.png",
+            "/live tv channel list.png",
+            "/live tv video playing preview.png",
+            "/LiveTV FullScreen.png"
+          ]}
+          apkUrl={`${BASE_URL}/apks/livetv.apk`}
+        />
+
         <ProjectCard
           title="Finance-Advisor"
           SubTitle="Hackathon Winner"
