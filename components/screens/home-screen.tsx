@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Linkedin, Github, BookOpen, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
-import type { ScreenType } from "../mobile-emulator"
+import { ScreenType } from "@/lib/types"
 import Image from "next/image"
 
 interface Star {
