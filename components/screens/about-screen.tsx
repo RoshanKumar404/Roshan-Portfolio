@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import type { ScreenType } from "../mobile-emulator"
+import { ScreenType } from "@/lib/types"
 import { CV_URL } from "@/lib/constants"
 import { Download, Rocket } from "lucide-react"
 

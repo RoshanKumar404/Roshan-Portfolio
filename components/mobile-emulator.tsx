@@ -9,9 +9,13 @@ import ProjectsScreen from "./screens/projects-screen"
 import ContactScreen from "./screens/contact-screen"
 import { cn } from "@/lib/utils"
 
-export type ScreenType = "home" | "about" | "projects" | "contact"
+import { ScreenType } from "@/lib/types"
 
-export default function MobileEmulator() {
+export interface MobileEmulatorProps {
+  onScreenChange?: (screen: ScreenType) => void
+}
+
+export default function MobileEmulator({ onScreenChange }: MobileEmulatorProps) {
   const [currentScreen, setCurrentScreen] = useState<ScreenType>("home")
   const [prevScreen, setPrevScreen] = useState<ScreenType | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -20,6 +24,7 @@ export default function MobileEmulator() {
     if (screen !== currentScreen) {
       setPrevScreen(currentScreen)
       setCurrentScreen(screen)
+      onScreenChange?.(screen)
     }
   }
 

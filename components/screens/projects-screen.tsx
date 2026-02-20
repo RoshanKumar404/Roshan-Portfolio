@@ -1,6 +1,6 @@
 "use client"
 
-import type { ScreenType } from "../mobile-emulator"
+import { ScreenType } from "@/lib/types"
 import ProjectCard from "./project-card"
 import { PROJECTS } from "@/lib/constants"
 import { motion } from "framer-motion"

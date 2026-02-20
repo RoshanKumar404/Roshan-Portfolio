@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone } from "lucide-react"
-import type { ScreenType } from "../mobile-emulator"
+import { ScreenType } from "@/lib/types"
 
 interface ContactScreenProps {
   onNavigate: (screen: ScreenType) => void
