@@ -2,63 +2,36 @@
 
 import type { ScreenType } from "../mobile-emulator"
 import ProjectCard from "./project-card"
+import { PROJECTS } from "@/lib/constants"
+import { motion } from "framer-motion"
 
 interface ProjectsScreenProps {
   onNavigate: (screen: ScreenType) => void
 }
 
 export default function ProjectsScreen({ onNavigate }: ProjectsScreenProps) {
-  const BASE_URL = process.env.NODE_ENV === "development"
-  ? "http://localhost:3000/"
-  : "https://roshanandroiddevelper.netlify.app/";
-
-
   return (
-    <div className="min-h-full bg-gray-900 text-white p-6">
-      <h1 className="text-2xl font-bold mb-6">PROJECTS</h1>
+    <div className="min-h-full bg-slate-950 text-white p-6">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="mb-8"
+      >
+        <h1 className="text-3xl font-black tracking-tighter text-glow">PROJECTS</h1>
+        <div className="w-12 h-1 bg-pink-500 mt-2 rounded-full"></div>
+      </motion.div>
 
-      <div className="space-y-8">
-        <ProjectCard
-          title="Global Water-Logging Detector"
-          SubTitle="AI & GPS Monitoring"
-          description="A sophisticated Android solution leveraging Computer Vision to identify water-logged areas. It generates real-time, GPS-tagged reports to assist municipal authorities in rapid flood response."
-          screenshots={[
-            "/Dtector  image uploading for AI procesing.png",
-            "/camera screen.png",
-            "/water detector report ai resposne.png",
-            "/location the water logged area detected form the image.png"
-          ]}
-          apkUrl={`${BASE_URL}/apks/detector.apk`}
-        />
-
-        <ProjectCard
-          title="Live Stream Pro"
-          SubTitle="Kotlin & Jetpack Compose"
-          description="A high-performance streaming platform offering seamless live TV playback. Features a modern intuitive interface, optimized buffering, and robust channel management."
-          screenshots={[
-            "/Live tv channels.png",
-            "/live tv channel list.png",
-            "/live tv video playing preview.png",
-            "/LiveTV FullScreen.png"
-          ]}
-          apkUrl={`${BASE_URL}/apks/livetv.apk`}
-        />
-
-        <ProjectCard
-          title="Finance Advisor"
-          SubTitle="Hackathon Champion"
-          description="An intuitive financial management app developed for small business owners. It simplifies bookkeeping with digital ledger tracking for online and cash transactions."
-          screenshots={["/Finance_Screen.jpg", "/Finance_Screen1.jpg", "Finance_Screen5.jpg","Finance_Screen4.jpg","Finance_Screen6.png"]}
-          apkUrl={`${BASE_URL}/apks/FinanceAdvisor.apk`}
-        />
-
-        <ProjectCard
-          title="Velvet View"
-          SubTitle="Generative AI"
-          description="An innovative mobile gallery powered by DALL-E and Midjourney integration. Velvet View allows users to generate and apply high-resolution AI wallpapers instantly."
-          screenshots={["/Velvet_Screen1.png", "/Velvet_Screen2.png", "/Velvet_Screen3.png","/Velvet_Screen4.png","/Velvet_Screen5.png","/Velvet_Screen6.png"]}
-          apkUrl={`${BASE_URL}/apks/VelvetView.apk`}
-        />
+      <div className="space-y-4">
+        {PROJECTS.map((project, idx) => (
+          <ProjectCard
+            key={idx}
+            title={project.title}
+            SubTitle={project.subTitle}
+            description={project.description}
+            screenshots={project.screenshots}
+            apkUrl={project.apkUrl}
+          />
+        ))}
       </div>
     </div>
   )
