@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CV_URL } from '@/lib/constants'
@@ -19,7 +19,12 @@ const MobileEmulator = dynamic(() => import("@/components/mobile-emulator"), {
 })
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false)
   const [activeScreen, setActiveScreen] = useState<ScreenType>("home")
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const sidebarContent: Record<ScreenType, {
     left: { title: string; description: string; stats: { value: string; label: string }[] };
@@ -120,39 +125,41 @@ export default function Home() {
         
         {/* Left Sidebar */}
         <div className="hidden lg:flex flex-col w-1/4 h-[650px] justify-between py-10">
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={`${activeScreen}-left`}
-              initial={{ opacity: 0, x: -50, filter: "blur(10px)" }}
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, x: -30, filter: "blur(10px)" }}
-              transition={{ duration: 0.5, ease: "circOut" }}
-              className="space-y-10"
-            >
-              <div className="space-y-4">
-                <h2 className="text-sm font-black tracking-[0.4em] text-pink-500 uppercase">{currentContent.left.title}</h2>
-                <h1 className="text-5xl font-black tracking-tighter leading-none italic uppercase">
-                  {activeScreen === "home" ? (
-                    <>AI <br /><span className="text-white/20">DRIVEN.</span><br />NATIVE.</>
-                  ) : activeScreen.split("").join(" ")}
-                </h1>
-              </div>
-
-              <div className="glass-dark p-6 rounded-3xl border border-white/5 space-y-6">
-                <p className="text-xs text-slate-400 leading-relaxed font-medium">
-                  {currentContent.left.description}
-                </p>
-                <div className="flex gap-4">
-                  {currentContent.left.stats.map((stat: { value: string; label: string }, idx: number) => (
-                    <div key={idx} className={`flex-1 ${idx > 0 ? "border-l border-white/5 pl-4" : ""}`}>
-                      <div className="text-2xl font-black tracking-tighter">{stat.value}</div>
-                      <div className="text-[9px] uppercase font-bold tracking-widest text-slate-500">{stat.label}</div>
-                    </div>
-                  ))}
+          {mounted && (
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={`${activeScreen}-left`}
+                initial={{ opacity: 0, x: -50, filter: "blur(10px)" }}
+                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, x: -30, filter: "blur(10px)" }}
+                transition={{ duration: 0.5, ease: "circOut" }}
+                className="space-y-10"
+              >
+                <div className="space-y-4">
+                  <h2 className="text-sm font-black tracking-[0.4em] text-pink-500 uppercase">{currentContent.left.title}</h2>
+                  <h1 className="text-5xl font-black tracking-tighter leading-none italic uppercase">
+                    {activeScreen === "home" ? (
+                      <>AI <br /><span className="text-white/20">DRIVEN.</span><br />NATIVE.</>
+                    ) : activeScreen.split("").join(" ")}
+                  </h1>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+
+                <div className="glass-dark p-6 rounded-3xl border border-white/5 space-y-6">
+                  <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                    {currentContent.left.description}
+                  </p>
+                  <div className="flex gap-4">
+                    {currentContent.left.stats.map((stat: { value: string; label: string }, idx: number) => (
+                      <div key={idx} className={`flex-1 ${idx > 0 ? "border-l border-white/5 pl-4" : ""}`}>
+                        <div className="text-2xl font-black tracking-tighter">{stat.value}</div>
+                        <div className="text-[9px] uppercase font-bold tracking-widest text-slate-500">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          )}
 
           <div className="flex items-center gap-4 text-slate-500 mt-auto">
             <span className="text-[10px] font-bold tracking-widest uppercase">Connect</span>
@@ -177,54 +184,58 @@ export default function Home() {
 
         {/* Right Sidebar */}
         <div className="hidden lg:flex flex-col w-1/4 h-[650px] justify-between py-10">
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={`${activeScreen}-right`}
-              initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, x: 30, filter: "blur(10px)" }}
-              transition={{ duration: 0.5, ease: "circOut" }}
-              className="space-y-12"
-            >
-              <div className="space-y-6">
-                <h2 className="text-sm font-black tracking-[0.4em] text-pink-500 uppercase text-right">{currentContent.right.title}</h2>
-                <div className="flex flex-wrap justify-end gap-2">
-                  {currentContent.right.items.map((tech: { name: string; icon: any }) => (
-                    <div key={tech.name} className="glass border border-white/10 px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-white/10 transition-colors cursor-default group">
-                      <tech.icon size={12} className="text-pink-500 group-hover:scale-110 transition-transform" />
-                      <span className="text-[10px] font-bold uppercase tracking-wider">{tech.name}</span>
+          {mounted && (
+            <>
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={`${activeScreen}-right`}
+                  initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, x: 30, filter: "blur(10px)" }}
+                  transition={{ duration: 0.5, ease: "circOut" }}
+                  className="space-y-12"
+                >
+                  <div className="space-y-6">
+                    <h2 className="text-sm font-black tracking-[0.4em] text-pink-500 uppercase text-right">{currentContent.right.title}</h2>
+                    <div className="flex flex-wrap justify-end gap-2">
+                      {currentContent.right.items.map((tech: { name: string; icon: any }) => (
+                        <div key={tech.name} className="glass border border-white/10 px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-white/10 transition-colors cursor-default group">
+                          <tech.icon size={12} className="text-pink-500 group-hover:scale-110 transition-transform" />
+                          <span className="text-[10px] font-bold uppercase tracking-wider">{tech.name}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+
+                  <div className="space-y-4">
+                    <a 
+                      href={CV_URL} 
+                      download
+                      className="glass-dark border border-white/5 w-full py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-pink-600 transition-all font-black text-[10px] tracking-[0.2em] shadow-xl shadow-black/20"
+                    >
+                      <Download size={14} />
+                      DOWNLOAD RESUME
+                    </a>
+                    <button 
+                      onClick={() => setActiveScreen("contact")}
+                      className="w-full py-5 rounded-2xl flex items-center justify-center gap-3 bg-white text-black hover:bg-slate-200 transition-all font-black text-[10px] tracking-[0.2em]"
+                    >
+                      <ExternalLink size={14} />
+                      LET&apos;S TALK
+                    </button>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="text-right mt-auto">
+                <div className="text-[10px] font-bold tracking-[0.2em] text-slate-600 uppercase">Availability</div>
+                <div className="font-bold tracking-tight text-green-500 flex items-center justify-end gap-2 text-xs">
+                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                  OPEN FOR PROJECTS
                 </div>
               </div>
-
-              <div className="space-y-4">
-                <a 
-                  href={CV_URL} 
-                  download
-                  className="glass-dark border border-white/5 w-full py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-pink-600 transition-all font-black text-[10px] tracking-[0.2em] shadow-xl shadow-black/20"
-                >
-                  <Download size={14} />
-                  DOWNLOAD RESUME
-                </a>
-                <button 
-                  onClick={() => setActiveScreen("contact")}
-                  className="w-full py-5 rounded-2xl flex items-center justify-center gap-3 bg-white text-black hover:bg-slate-200 transition-all font-black text-[10px] tracking-[0.2em]"
-                >
-                  <ExternalLink size={14} />
-                  LET&apos;S TALK
-                </button>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="text-right mt-auto">
-            <div className="text-[10px] font-bold tracking-[0.2em] text-slate-600 uppercase">Availability</div>
-            <div className="font-bold tracking-tight text-green-500 flex items-center justify-end gap-2 text-xs">
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-              OPEN FOR PROJECTS
-            </div>
-          </div>
+            </>
+          )}
         </div>
 
       </div>
