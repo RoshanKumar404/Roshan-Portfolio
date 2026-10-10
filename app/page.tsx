@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CV_URL } from '@/lib/constants'
+import { CV_URL, REACT_NATIVE_CV_URL } from '@/lib/constants'
 import { Download, Mail, ExternalLink, Code2, Cpu, Globe, Zap, Shield, Layout, Target, Sparkles } from 'lucide-react'
 import { ScreenType } from '@/lib/types'
 
@@ -32,69 +32,69 @@ export default function Home() {
   }> = {
     home: {
       left: {
-        title: "MASTERY",
-        description: "A specialized Software Engineer focused on building high-performance Android applications and seamless AI-integrated systems.",
+        title: "ENGINEERING",
+        description: "Computer Science graduate building low-level Java systems, offline-first mobile apps, and backend services with practical performance work.",
         stats: [
-          { value: "02+", label: " Years of PersonalExp." },
-          { value: "11+", label: "Projects" }
+          { value: "2026", label: "B.Tech CSE" },
+          { value: "10k+", label: "Proxy QPS" }
         ]
       },
       right: {
         title: "CORE STACK",
         items: [
-          { name: "Kotlin", icon: Code2 },
-          { name: "AI/ML", icon: Cpu },
-          { name: "React-Native", icon: Globe },
-          { name: "Python", icon: Zap },
-          { name: "Java", icon: Sparkles }
+          { name: "Java NIO", icon: Code2 },
+          { name: "React Native", icon: Globe },
+          { name: "Kotlin", icon: Sparkles },
+          { name: "PostgreSQL", icon: Cpu },
+          { name: "Python", icon: Zap }
         ]
       }
     },
     about: {
       left: {
-        title: "PHILOSOPHY",
-        description: "Architecture is about intent. I build software that is as maintainable as it is efficient, ensuring long-term scalability.",
+        title: "FOCUS",
+        description: "I like software where the internals matter: concurrency, storage, offline sync, spatial queries, and mobile performance.",
         stats: [
-          { value: "95%", label: "Native Perf" },
-          { value: "90%", label: "UX Research" }
+          { value: "REC", label: "Ramgarh Engg." },
+          { value: "CS", label: "Core Strength" }
         ]
       },
       right: {
         title: "EXPERTISE",
         items: [
-          { name: "Architecture", icon: Layout },
-          { name: "Optimization", icon: Zap },
-          { name: "Database", icon: Cpu },
+          { name: "Concurrency", icon: Zap },
+          { name: "Storage", icon: Cpu },
+          { name: "Mobile", icon: Layout },
           { name: "Security", icon: Shield }
         ]
       }
     },
     projects: {
       left: {
-        title: "STRATEGY",
-        description: "From wireframing to final distribution, every project is built with user-centric modularity and clean architecture.",
+        title: "PROJECTS",
+        description: "Recent work spans a Java reverse proxy, an LSM-tree storage engine, geospatial APIs, encrypted notes, and offline-first shop tools.",
         stats: [
-          { value: "100%", label: "Success Rate" },
-          { value: "MVP", label: "Ready" }
+          { value: "7+", label: "Featured Builds" },
+          { value: "100ms", label: "Spatial Lookup" }
         ]
       },
       right: {
         title: "TECH DEPTH",
         items: [
-          { name: "Clean Arch", icon: Target },
-          { name: "Compose", icon: Layout },
-          { name: "API Design", icon: Globe },
-          { name: "Cloud", icon: Shield }
+          { name: "Java NIO", icon: Target },
+          { name: "WAL", icon: Shield },
+          { name: "PostGIS", icon: Globe },
+          { name: "SQLite", icon: Layout }
         ]
       }
     },
     contact: {
       left: {
         title: "STATUS",
-        description: "Currently open for high-impact projects and engineering consultations. Ready to build the next big thing.",
+        description: "Open to Software Engineering, Android, React Native, and backend roles where fundamentals and shipping both matter.",
         stats: [
-          { value: "24h", label: "Reply Time" },
-          { value: "Remote", label: "Available" }
+          { value: "BLR", label: "Bengaluru" },
+          { value: "Remote", label: "Open" }
         ]
       },
       right: {
@@ -139,7 +139,7 @@ export default function Home() {
                   <h2 className="text-sm font-black tracking-[0.4em] text-pink-500 uppercase">{currentContent.left.title}</h2>
                   <h1 className="text-5xl font-black tracking-tighter leading-none italic uppercase">
                     {activeScreen === "home" ? (
-                      <>AI <br /><span className="text-white/20">DRIVEN.</span><br />NATIVE.</>
+                      <>SYSTEMS <br /><span className="text-white/20">MOBILE.</span><br />BACKEND.</>
                     ) : activeScreen.split("").join(" ")}
                   </h1>
                 </div>
@@ -164,7 +164,7 @@ export default function Home() {
           <div className="flex items-center gap-4 text-slate-500 mt-auto">
             <span className="text-[10px] font-bold tracking-widest uppercase">Connect</span>
             <div className="h-[1px] flex-1 bg-white/5"></div>
-            <a href="mailto:roshankuar951@gmail.com" className="hover:text-pink-500 transition-colors">
+            <a href="mailto:roshankumar951@gmail.com" className="hover:text-pink-500 transition-colors">
               <Mail size={16} />
             </a>
           </div>
@@ -214,7 +214,15 @@ export default function Home() {
                       className="glass-dark border border-white/5 w-full py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-pink-600 transition-all font-black text-[10px] tracking-[0.2em] shadow-xl shadow-black/20"
                     >
                       <Download size={14} />
-                      DOWNLOAD RESUME
+                      SOFTWARE RESUME
+                    </a>
+                    <a 
+                      href={REACT_NATIVE_CV_URL} 
+                      download
+                      className="glass-dark border border-white/5 w-full py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-white/10 transition-all font-black text-[10px] tracking-[0.2em] shadow-xl shadow-black/20"
+                    >
+                      <Download size={14} />
+                      REACT NATIVE CV
                     </a>
                     <button 
                       onClick={() => setActiveScreen("contact")}

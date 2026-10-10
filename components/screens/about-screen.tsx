@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { ScreenType } from "@/lib/types"
-import { CV_URL } from "@/lib/constants"
+import { CV_URL, REACT_NATIVE_CV_URL } from "@/lib/constants"
 import { Download, Rocket } from "lucide-react"
 
 interface AboutScreenProps {
@@ -23,12 +23,12 @@ export default function AboutScreen({ onNavigate }: AboutScreenProps) {
       </motion.div>
 
       <h2 className="text-xl font-bold mb-4 tracking-tight leading-tight">
-        Solving complex problems with <span className="text-pink-500">elegant code.</span>
+        Building practical software with <span className="text-pink-500">strong internals.</span>
       </h2>
 
       <p className="text-xs text-gray-400 mb-8 leading-relaxed font-medium">
-        I am a results-driven Software Engineer with a mastery in <span className="text-white">Android Native Development</span> and <span className="text-white">AI Integration</span>. 
-        As the champion of the <span className="text-pink-500">Hack Horizon</span>, I thrive on building high-performance systems.
+        I am a B.Tech CSE graduate focused on <span className="text-white">Java systems</span>, <span className="text-white">React Native and Android apps</span>, and backend services. 
+        My work includes non-blocking network I/O, custom storage engines, offline-first sync, geospatial APIs, and encrypted mobile experiences.
       </p>
 
       <div className="mb-8 glass-dark p-5 rounded-3xl border border-white/5">
@@ -40,17 +40,29 @@ export default function AboutScreen({ onNavigate }: AboutScreenProps) {
             <div className="font-bold text-white tracking-tight">Roshan Kumar</div>
           </div>
           <div>
-            <div className="text-gray-500 uppercase text-[9px] font-bold tracking-widest mb-1">Born</div>
-            <div className="font-bold text-white tracking-tight">May 5th, 2002</div>
+            <div className="text-gray-500 uppercase text-[9px] font-bold tracking-widest mb-1">Education</div>
+            <div className="font-bold text-white tracking-tight">B.Tech CSE, 2026</div>
           </div>
           <div>
             <div className="text-gray-500 uppercase text-[9px] font-bold tracking-widest mb-1">Location</div>
-            <div className="font-bold text-white tracking-tight">Ranchi, India</div>
+            <div className="font-bold text-white tracking-tight">Bengaluru, India</div>
           </div>
           <div>
             <div className="text-gray-500 uppercase text-[9px] font-bold tracking-widest mb-1">Email</div>
-            <div className="truncate font-bold text-white tracking-tight">roshankuar951@...</div>
+            <div className="truncate font-bold text-white tracking-tight">roshankumar951@...</div>
           </div>
+        </div>
+      </div>
+
+      <div className="mb-8 glass-dark p-5 rounded-3xl border border-white/5">
+        <h3 className="text-[10px] font-black tracking-[0.3em] mb-4 text-pink-500 uppercase">EXPERIENCE</h3>
+        <div className="text-xs text-gray-400 leading-relaxed font-medium space-y-3">
+          <p>
+            <span className="text-white font-bold">Android Developer Intern, Apex Planet</span> - connected REST endpoints with Kotlin Coroutines and improved list scrolling by moving processing off the main thread.
+          </p>
+          <p>
+            Coursework and projects cover Data Structures, Algorithms, Operating Systems, DBMS, Computer Networks, OOP, Low-Level Design, and System Design.
+          </p>
         </div>
       </div>
 
@@ -62,11 +74,11 @@ export default function AboutScreen({ onNavigate }: AboutScreenProps) {
 
         <div className="space-y-5">
           {[
-            { name: "Android Native", level: "95%" },
-            { name: "React Native", level: "90%" },
-            { name: "AI & TensorFlow", level: "85%" },
-            { name: "Python / Backend", level: "80%" },
-            { name: "Next.js / Web", level: "75%" },
+            { name: "Java / NIO / Concurrency", level: "92%" },
+            { name: "React Native / TypeScript", level: "90%" },
+            { name: "Kotlin / Android SDK", level: "88%" },
+            { name: "PostgreSQL / PostGIS / pgvector", level: "84%" },
+            { name: "Python / Flask / REST APIs", level: "80%" },
           ].map((skill) => (
             <div key={skill.name}>
               <div className="flex justify-between mb-2 text-[10px] font-black uppercase tracking-widest">
@@ -98,7 +110,13 @@ export default function AboutScreen({ onNavigate }: AboutScreenProps) {
         <Button variant="outline" className="border-white/10 hover:bg-white/5 rounded-2xl h-12 font-black tracking-[0.2em] text-[10px]" asChild>
           <a href={CV_URL} download>
             <Download size={14} className="mr-2" />
-            DOWNLOAD CV
+            SOFTWARE RESUME
+          </a>
+        </Button>
+        <Button variant="outline" className="border-white/10 hover:bg-white/5 rounded-2xl h-12 font-black tracking-[0.2em] text-[10px]" asChild>
+          <a href={REACT_NATIVE_CV_URL} download>
+            <Download size={14} className="mr-2" />
+            REACT NATIVE CV
           </a>
         </Button>
       </div>

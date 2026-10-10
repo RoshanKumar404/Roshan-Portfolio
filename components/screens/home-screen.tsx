@@ -98,10 +98,10 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
             transition={{ delay: 0.3 }}
           >
             <h1 className="text-4xl font-black tracking-tighter leading-[0.9] mb-4">
-              CRAFTING <br />
+              BUILDING <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500 text-glow">
-                DIGITAL <br />
-                EXCELLENCE.
+                SYSTEMS <br />
+                THAT SHIP.
               </span>
             </h1>
           </motion.div>
@@ -112,7 +112,7 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
             transition={{ delay: 0.4 }}
             className="text-[11px] text-gray-300 mt-6 leading-relaxed font-medium max-w-[220px]"
           >
-            Building high-performance mobile experiences and intelligent AI solutions.
+            Java systems, offline-first mobile apps, and backend services with strong CS fundamentals.
           </motion.p>
 
           <motion.div
@@ -141,7 +141,7 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
           {[
             { Icon: Linkedin, href: "https://www.linkedin.com/in/roshan-kumar-3bb631267/" },
             { Icon: Github, href: "https://github.com/RoshanKumar404" },
-            { Icon: BookOpen, href: "#" }
+            { Icon: BookOpen, href: "/Roshan Resume.pdf" }
           ].map(({ Icon, href }, idx) => (
             <a
               key={idx}

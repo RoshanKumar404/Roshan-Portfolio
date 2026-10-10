@@ -24,10 +24,10 @@ export default function ContactScreen({ onNavigate }: ContactScreenProps) {
   return (
     <div className="min-h-full bg-gray-900 text-white p-6 overflow-y-auto">
       <h1 className="text-2xl font-bold mb-2">CONTACT</h1>
-      <h2 className="text-xl mb-4">I'd Love To Hear From You.</h2>
+      <h2 className="text-xl mb-4">Let's build something useful.</h2>
 
       <p className="text-sm text-gray-300 mb-6 font-medium">
-        Have a project in mind or just want to say hello? Drop me a message below and I'll get back to you as soon as possible.
+        I am open to Software Engineering, Android, React Native, and backend opportunities. Send a message and I will get back to you soon.
       </p>
 
       <form action={handleSubmit} className="space-y-4 mb-8">
@@ -70,8 +70,8 @@ export default function ContactScreen({ onNavigate }: ContactScreenProps) {
             <Mail size={16} className="text-pink-500 mr-2" />
             <span className="text-[10px] text-gray-400 uppercase font-bold tracking-tighter">Email Me</span>
           </div>
-          <a href="mailto:roshankuar951@gmail.com" className="text-sm font-medium hover:text-pink-500 transition-colors">
-            roshankuar951@gmail.com
+          <a href="mailto:roshankumar951@gmail.com" className="text-sm font-medium hover:text-pink-500 transition-colors">
+            roshankumar951@gmail.com
           </a>
         </div>
 
